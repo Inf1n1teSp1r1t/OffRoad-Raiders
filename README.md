@@ -1,2 +1,5 @@
 # OffRoad-Raiders
-Showcase of required assignments for a Digital Media Class.
+
+Week 11 Completion:
+-Task 1: Completed by Ian
+-Task 2: Completed by Conor
