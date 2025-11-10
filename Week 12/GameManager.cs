@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyOnePrefab;
     public GameObject cloudPrefab;
+    public GameObject coinPrefab;
 
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI scoreText;
@@ -28,17 +29,24 @@ public class GameManager : MonoBehaviour
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
         CreateSky();
         InvokeRepeating("CreateEnemy", 1, 3);
+        InvokeRepeating("CreateCoin", 1, 5);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void CreateEnemy()
     {
         Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
+    }
+
+    //Randomly creates a coin that traverses the screen. Done by Ian Farmer
+    void CreateCoin()
+    {
+        Instantiate(coinPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
     }
 
     void CreateSky()
@@ -47,7 +55,7 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(cloudPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
         }
-        
+
     }
 
     //add SCORE text that copies lives text format here. Done by Conor Whelan
@@ -57,7 +65,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    public void ChangeLivesText (int currentLives)
+    public void ChangeLivesText(int currentLives)
     {
         livesText.text = "Lives: " + currentLives;
     }
