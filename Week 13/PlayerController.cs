@@ -43,11 +43,13 @@ public class PlayerController : MonoBehaviour
         if (Shielding == true)
         {
             Debug.Log("kill shield");
+            gameManager.PlaySound(2);
             Shielding = false;
             shieldPrefab.SetActive(false);
             gameManager.ManagePowerupText(0);
-            gameManager.PlaySound(2);
-        } else {
+        }
+        else
+        {
             lives--;
             gameManager.ChangeLivesText(lives);
         }
@@ -63,23 +65,23 @@ public class PlayerController : MonoBehaviour
     IEnumerator SpeedPowerDown()
     {
         yield return new WaitForSeconds(3f);
+        gameManager.PlaySound(2);
         speed = 5f;
         thrusterPrefab.SetActive(false);
         gameManager.ManagePowerupText(0);
-        gameManager.PlaySound(2);
     }
 
     IEnumerator WeaponPowerDown()
     {
         yield return new WaitForSeconds(3f);
+        gameManager.PlaySound(2);
         weaponType = 1;
         gameManager.ManagePowerupText(0);
-        gameManager.PlaySound(2);
     }
 
     private void OnTriggerEnter2D(Collider2D whatDidIHit)
     {
-        if(whatDidIHit.tag == "Powerup")
+        if (whatDidIHit.tag == "Powerup")
         {
             Destroy(whatDidIHit.gameObject);
             int whichPowerup = Random.Range(1, 5);
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
                     gameManager.ManagePowerupText(3);
                     break;
                 case 4:
-                    Shielding = true; //I couldn't figure it out but this worked so im calling it a day
+                    Shielding = true;
                     shieldPrefab.SetActive(true);
                     gameManager.ManagePowerupText(4);
                     break;
@@ -114,9 +116,9 @@ public class PlayerController : MonoBehaviour
 
     void Shooting()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            switch(weaponType)
+            switch (weaponType)
             {
                 case 1:
                     Instantiate(bulletPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
